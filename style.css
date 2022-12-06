@@ -6,7 +6,7 @@
 }
 html {
     font-size: 35px;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Fjalla One', sans-serif;
 }
 body {
     display: flex;
@@ -54,6 +54,9 @@ button:hover {
     grid-column: 1/1;
     background-color:#FAE9C5;
     border: 1.5px solid #4E3F54;
+    font-size: 16px;
+    font-weight: 300;
+    color: #2a2a2b;
 }
 .clear {
     width: 1fr;
