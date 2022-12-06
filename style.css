@@ -1,0 +1,90 @@
+* {
+   /*  border: 1px solid red; */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 35px;
+    font-family: 'Anton', sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+    width: 100%;
+    padding: 1em;
+    font-family: 'Fjalla One', sans-serif;
+}
+button {
+    background-color:#EFC5FA;
+    font-weight: 400;
+    border-radius: 3px;
+    border: 1.5px solid #4E3F54;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 16px;
+}
+button:hover {
+    border: 1.5px solid #4E3F54;
+}
+.container {
+    max-width: 10em;
+    border: 1.5px solid #2a2a2b;
+    padding: 2px;
+    background-color: rgba(222, 222, 222, 0.654);
+}
+.display {
+    display: grid;
+    grid-gap: 1px;
+    column-gap: 2px;
+    height: 1.3em;
+    grid-template-columns: 3fr 1fr;
+}
+.display > * {
+    padding: 0.5em 1.25em;
+    margin-bottom: 1px;
+}
+.screen {
+    width: 3fr;
+    text-align: right;
+    grid-column: 1/1;
+    background-color:#FAE9C5;
+    border: 1.5px solid #4E3F54;
+}
+.clear {
+    width: 1fr;
+    background-color:#A888B5;
+    
+}
+.clear:hover {
+    border: 2px solid #4E3F54;
+}
+.calculator-keys {
+    display: grid;
+    grid-gap: 1px;
+    height: 6em;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 1px;   
+}
+.calculator-keys > * {
+    padding: 0.5em 1.25em;
+    border: 1.3px solid #483a4e;
+    margin: 1px 1px;
+}
+.equal {
+    grid-column: -2;
+    grid-row: 2 / span 4;
+    background-color:#A888B5;
+  }
+.equal:hover {
+    border: 2px solid #4E3F54;
+}
+.key {
+    font-size: 22px;
+    padding: 0.1em 1em;
+    font-weight: 500;
+}
