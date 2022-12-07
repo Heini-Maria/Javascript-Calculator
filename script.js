@@ -4,7 +4,9 @@ const operators = document.querySelectorAll('.key');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
 const back = document.querySelector('.back');
-const decimal = document.querySelector('.decimal')
+const decimal = document.querySelector('.decimal');
+
+
 
 
 const Calculator = {
@@ -12,11 +14,9 @@ currentNum: '',
 operator: undefined,
 previousNum: '',
 
-
 operate () {
-    let result;
-    const prev = Number(this.previousNum);
-    const current = Number(this.currentNum);
+    const prev = parseFloat(this.previousNum);
+    const current = parseFloat(this.currentNum);
 if (this.operator == "+") {
     result = (prev + current);
 } else if (this.operator == "-") {
@@ -28,11 +28,12 @@ if (this.operator == "+") {
 } else {
     console.log("wooopsie!");
 }
-this.currentNum = result; 
+;
+this.previousNum = result; 
 this.operator = undefined
-this.previousNum = ''
+this.currentNum = ''
 console.log(result);
-screen.textContent = result
+screen.textContent = result;
 
 },
 
@@ -41,11 +42,15 @@ appendNum (num) {
   console.log(this.currentNum)
 },
 chooseOperator (operator) {
-    if(!this.operator) {
+    if(!this.operator && this.currentNum !='') {
     this.operator = operator; 
     console.log(this.currentNum);
     this.previousNum = this.currentNum;
     this.currentNum = '';
+    } else if (this.currentNum != '' && this.previousNum !='') {
+    this.operate();
+    console.log(this.currentNum)
+    this.operator = operator;
     } else {
         this.operator = operator;
     }
@@ -63,13 +68,14 @@ clear () {
 back () {
     this.currentNum = this.currentNum.toString().slice(0,-1);
 }
-
 }
 
 numbers.forEach((num) => {
    num.addEventListener ('click', () => {
-   Calculator.appendNum(num.innerText)
+   if(Calculator.currentNum.length < 8) {
+    Calculator.appendNum(num.innerText)
    screen.textContent = Calculator.currentNum;
+}
 });
 })
 operators.forEach((operator) => {
@@ -83,7 +89,9 @@ equal.addEventListener ('click', () => {
         screen.textContent = 0;
     } else if(Calculator.previousNum == ''){
         screen.textContent = Calculator.currentNum;    
-    } else {
+    } else if (Calculator.previousNum !=='' && Calculator.currentNum =='') {
+        screen.textContent = Calculator.previousNum;
+    }else{
         Calculator.operate();
     }
 })   
@@ -94,10 +102,12 @@ clear.addEventListener ('click', () => {
 back.addEventListener ('click', () => {
     Calculator.back();
     screen.textContent = Calculator.currentNum;
+    if(Calculator.currentNum == '') {
+        screen.textContent = 0;
+    }
 })
 decimal.addEventListener ('click', () => {
         if (!Calculator.currentNum.includes('.'))
         Calculator.appendNum(decimal.innerText);
         screen.textContent = Calculator.currentNum;
-
 })
