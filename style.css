@@ -58,12 +58,12 @@ button:hover {
     font-weight: 300;
     color: #2a2a2b;
 }
-.clear {
+.back, .clear {
     width: 1fr;
-    background-color:#A888B5;
+    background-color:#c19fcd;
     
 }
-.clear:hover {
+.back:hover, .clear:hover {
     border: 2px solid #4E3F54;
 }
 .calculator-keys {
@@ -81,9 +81,12 @@ button:hover {
 .equal {
     grid-column: -2;
     grid-row: 2 / span 4;
-    background-color:#A888B5;
+    
   }
-.equal:hover {
+.equal, .key {
+    background-color:#c9b8cb;
+}
+.equal:hover, .key:hover {
     border: 2px solid #4E3F54;
 }
 .key {
