@@ -6,9 +6,6 @@ const clear = document.querySelector('.clear');
 const back = document.querySelector('.back');
 const decimal = document.querySelector('.decimal');
 
-
-
-
 const Calculator = {
 currentNum: '',
 operator: undefined,
@@ -23,18 +20,16 @@ if (this.operator == "+") {
     result = prev - current;
 } else if (this.operator == "*") {
     result = prev * current;
-} else if (this.operator == "÷") {
+} else if (this.operator == "÷" || this.operator == "/") {
     result = prev / current;
 } else {
     console.log("wooopsie!");
-}
-;
-this.previousNum = result; 
+};
+this.previousNum = result.toString(); 
 this.operator = undefined
 this.currentNum = ''
 console.log(result);
-screen.textContent = result;
-
+this.screenWork();
 },
 
 appendNum (num) {
@@ -59,6 +54,21 @@ chooseOperator (operator) {
     console.log(this.previousNum)
     console.log(this.currentNum);
 },
+screenWork() {
+    if (this.currentNum =='' && this.previousNum == '') {
+        screen.textContent = 0;
+    } if (this.currentNum != '' && this.previousNum == '' || this.currentNum != '' && this.previousNum != '' && this.operator != undefined || this.currentNum != '' && this.previousNum != '') {
+        screen.textContent = Calculator.currentNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    } if (this.previousNum != '' && this.currentNum == '' && this.operator == undefined ) { 
+        if(!this.previousNum.includes('.')) {
+            screen.textContent = this.previousNum.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        } else {
+        const fixedResult = parseFloat(this.previousNum).toFixed(3);
+        screen.textContent = fixedResult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); 
+}  
+}
+},
+
 clear () {
     this.currentNum = '';
     this.previousNum = '';
@@ -74,40 +84,69 @@ numbers.forEach((num) => {
    num.addEventListener ('click', () => {
    if(Calculator.currentNum.length < 8) {
     Calculator.appendNum(num.innerText)
-   screen.textContent = Calculator.currentNum;
+    Calculator.screenWork();
 }
 });
 })
 operators.forEach((operator) => {
     operator.addEventListener ('click', () => {
         Calculator.chooseOperator(operator.innerText);
-        screen.textContent = Calculator.previousNum;
+        Calculator.screenWork();
     })
 })
 equal.addEventListener ('click', () => {
-    if(screen.textContent == '') {
-        screen.textContent = 0;
-    } else if(Calculator.previousNum == ''){
-        screen.textContent = Calculator.currentNum;    
-    } else if (Calculator.previousNum !=='' && Calculator.currentNum =='') {
-        screen.textContent = Calculator.previousNum;
+    if (Calculator.previousNum == '' || Calculator.operator == undefined) {
+        Calculator.screenWork();
     }else{
         Calculator.operate();
     }
 })   
 clear.addEventListener ('click', () => {
     Calculator.clear();
-    screen.textContent = 0;
+    Calculator.screenWork();
 })
 back.addEventListener ('click', () => {
     Calculator.back();
-    screen.textContent = Calculator.currentNum;
-    if(Calculator.currentNum == '') {
-        screen.textContent = 0;
-    }
+    Calculator.screenWork();
 })
 decimal.addEventListener ('click', () => {
         if (!Calculator.currentNum.includes('.'))
         Calculator.appendNum(decimal.innerText);
-        screen.textContent = Calculator.currentNum;
+        Calculator.screenWork();
 })
+document.addEventListener('keydown', function(e) {
+    const numberPattern = /[0-9]/g;
+    const operatorPattern = /[+\-*\/]/g;
+    if (e.key.match(numberPattern)) {
+        e.preventDefault();
+        if(Calculator.currentNum.length < 8) {
+            Calculator.appendNum(e.key);
+            Calculator.screenWork();
+    }
+} if (e.key.match(operatorPattern)) {
+    e.preventDefault();
+    Calculator.chooseOperator(e.key);
+    Calculator.screenWork();
+} if (e.key === "Enter" || e.key === "=") {
+    e.preventDefault();
+    if(Calculator.previousNum == '' || Calculator.operator == undefined) {
+        Calculator.screenWork();
+    }else{
+        Calculator.operate();
+} 
+}if (e.key === "Delete") {
+    e.preventDefault();
+    Calculator.clear();
+    Calculator.screenWork();
+} if (e.key === "Backspace") {
+    e.preventDefault();
+    Calculator.back();
+    Calculator.screenWork();
+} if (e.key === ".") {
+    e.preventDefault();
+    if (!Calculator.currentNum.includes('.'))
+    Calculator.appendNum(decimal.innerText);
+    Calculator.screenWork();
+}
+});
+
