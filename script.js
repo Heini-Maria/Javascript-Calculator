@@ -58,7 +58,9 @@ screenWork() {
     if (this.currentNum =='' && this.previousNum == '') {
         screen.textContent = 0;
     } if (this.currentNum != '' && this.previousNum == '' || this.currentNum != '' && this.previousNum != '' && this.operator != undefined || this.currentNum != '' && this.previousNum != '') {
-        screen.textContent = Calculator.currentNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+         let parts = this.currentNum.split('.');
+         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+         screen.textContent = parts.join('.');
     } if (this.previousNum != '' && this.currentNum == '' && this.operator == undefined ) { 
         if(!this.previousNum.includes('.')) {
             screen.textContent = this.previousNum.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -115,7 +117,7 @@ decimal.addEventListener ('click', () => {
         Calculator.screenWork();
 })
 document.addEventListener('keydown', function(e) {
-    const numberPattern = /[0-9]/g;
+    const numberPattern = '^[0-9]+$';
     const operatorPattern = /[+\-*\/]/g;
     if (e.key.match(numberPattern)) {
         e.preventDefault();
@@ -131,10 +133,10 @@ document.addEventListener('keydown', function(e) {
     e.preventDefault();
     if(Calculator.previousNum == '' || Calculator.operator == undefined) {
         Calculator.screenWork();
-    }else{
+    } else {
         Calculator.operate();
 } 
-}if (e.key === "Delete") {
+} if (e.key === "Delete") {
     e.preventDefault();
     Calculator.clear();
     Calculator.screenWork();

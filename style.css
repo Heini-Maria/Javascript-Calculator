@@ -1,5 +1,4 @@
 * {
-   /*  border: 1px solid red; */
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -24,7 +23,7 @@ button {
     background-color:#EFC5FA;
     font-weight: 400;
     border-radius: 3px;
-    border: 1.5px solid #4E3F54;
+    border: 1.3px solid #4E3F54;
     font-family: 'Fjalla One', sans-serif;
     font-size: 16px;
 }
@@ -32,21 +31,22 @@ button:hover {
     border: 1.5px solid #4E3F54;
 }
 .container {
-    max-width: 10em;
-    border: 1.5px solid #2a2a2b;
+    width: 9em;
+    border: 1.3px solid #2a2a2b;
     padding: 2px;
     background-color: rgba(222, 222, 222, 0.654);
 }
 .display {
     display: grid;
-    grid-gap: 1px;
-    column-gap: 2px;
-    height: 1.3em;
+    column-gap: 1px;
+    height: 1.4em;
     grid-template-columns: 3fr 1fr;
+    margin: 2px 2px;
+
 }
 .display > * {
-    padding: 0.5em 1.25em;
-    margin-bottom: 1px;
+    padding: 0.5em 1.2em;
+    margin: 2px;
 }
 .screen {
     width: 3fr;
@@ -64,33 +64,32 @@ button:hover {
     
 }
 .back:hover, .clear:hover {
-    border: 2px solid #4E3F54;
+    border: 1.5px solid #4E3F54;
 }
 .calculator-keys {
     display: grid;
     grid-gap: 1px;
-    height: 6em;
+    height: 7.5em;
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 1px;   
+    margin: 2px;  
 }
 .calculator-keys > * {
-    padding: 0.5em 1.25em;
+    padding: 0.5em 0.5em;
     border: 1.3px solid #483a4e;
-    margin: 1px 1px;
+    margin: 2px;
 }
 .equal {
     grid-column: -2;
-    grid-row: 2 / span 4;
-    
-  }
+    grid-row: 2 / span 4;    
+}
 .equal, .key {
     background-color:#c9b8cb;
 }
 .equal:hover, .key:hover {
-    border: 2px solid #4E3F54;
+    border: 1.5px solid #4E3F54;
 }
 .key {
     font-size: 22px;
-    padding: 0.1em 1em;
+    padding: 0.2em 1em;
     font-weight: 500;
 }
