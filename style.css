@@ -63,7 +63,8 @@ button:hover {
     background-color:#c19fcd;
     
 }
-.back:hover, .clear:hover {
+.back:hover, 
+.clear:hover {
     border: 1.5px solid #4E3F54;
 }
 .calculator-keys {

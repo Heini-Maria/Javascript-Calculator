@@ -6,7 +6,7 @@ const clear = document.querySelector('.clear');
 const back = document.querySelector('.back');
 const decimal = document.querySelector('.decimal');
 
-const Calculator = {
+const calculator = {
 currentNum: '',
 operator: undefined,
 previousNum: '',
@@ -55,10 +55,14 @@ screenWork() {
          screen.textContent = parts.join('.');
     } if (this.previousNum != '' && this.currentNum == '' && this.operator == undefined ) { 
         if(!this.previousNum.includes('.')) {
-            screen.textContent = this.previousNum.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            let parts = this.previousNum.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            screen.textContent = parts.join('.');
         } else {
-        const fixedResult = parseFloat(this.previousNum).toFixed(3);
-        screen.textContent = fixedResult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); 
+        const fixedResult = parseFloat(this.previousNum).toFixed(4);
+        let parts = fixedResult.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        screen.textContent = parts.join('.'); 
 }  
 }
 },
@@ -77,45 +81,48 @@ back () {
 
 numbers.forEach((num) => {
    num.addEventListener ('click', () => {
-   if(Calculator.currentNum.length < 8) {
-    Calculator.appendNum(num.innerText)
-    Calculator.screenWork();
+    if(screen.textContent == '0' && num.innerText == '0') {
+        return;
+    }
+    if(calculator.currentNum.length < 8) {
+    calculator.appendNum(num.innerText)
+    calculator.screenWork();
 }
 });
 })
 operators.forEach((operator) => {
     operator.addEventListener ('click', () => {
-        Calculator.chooseOperator(operator.innerText);
-        Calculator.screenWork();
+        calculator.chooseOperator(operator.innerText);
+        calculator.screenWork();
     })
 })
 
 equal.addEventListener ('click', () => {
-    if (Calculator.currentNum == '' || Calculator.operator == undefined) {
-        Calculator.screenWork();
-    } else if (Calculator.previousNum == '') {
-        Calculator.previousNum = Calculator.currentNum;
-        Calculator.currentNum = '';
-        Calculator.screenWork();
+    if (calculator.currentNum == '' || calculator.operator == undefined) {
+        calculator.screenWork();
+    } else if (calculator.previousNum == '') {
+        calculator.previousNum = calculator.currentNum;
+        calculator.currentNum = '';
+        calculator.screenWork();
     } else {
-        Calculator.operate();
+        calculator.operate();
     }
 })
 
 clear.addEventListener ('click', () => {
-    Calculator.clear();
-    Calculator.screenWork();
+    calculator.clear();
+    calculator.screenWork();
 })
 
 back.addEventListener ('click', () => {
-    Calculator.back();
-    Calculator.screenWork();
+    calculator.back();
+    calculator.screenWork();
 })
 
 decimal.addEventListener ('click', () => {
-    if (!Calculator.currentNum.includes('.'))
-        Calculator.appendNum(decimal.innerText);
-        Calculator.screenWork();
+    if (!calculator.currentNum.includes('.'))
+        calculator.appendNum(decimal.innerText);
+        calculator.screenWork();
 })
 
 document.addEventListener('keydown', function(e) {
@@ -123,38 +130,38 @@ document.addEventListener('keydown', function(e) {
     const operatorPattern = /[+\-*\/]/g;
     if (e.key.match(numberPattern)) {
         e.preventDefault();
-        if(Calculator.currentNum.length < 8) {
-            Calculator.appendNum(e.key);
-            Calculator.screenWork();
+        if(calculator.currentNum.length < 8) {
+            calculator.appendNum(e.key);
+            calculator.screenWork();
     }
     } if (e.key.match(operatorPattern)) {
         e.preventDefault();
-        Calculator.chooseOperator(e.key);
-        Calculator.screenWork();
+        calculator.chooseOperator(e.key);
+        calculator.screenWork();
     } if (e.key === "Enter" || e.key === "=") {
         e.preventDefault();
-        if (Calculator.currentNum == '' || Calculator.operator == undefined) {
-            Calculator.screenWork();
-        } else if (Calculator.previousNum == '') {
-            Calculator.previousNum = Calculator.currentNum;
-            Calculator.currentNum = '';
-            Calculator.screenWork();
+        if (calculator.currentNum == '' || calculator.operator == undefined) {
+            calculator.screenWork();
+        } else if (calculator.previousNum == '') {
+            calculator.previousNum = calculator.currentNum;
+            calculator.currentNum = '';
+            calculator.screenWork();
         } else {
-            Calculator.operate();
+            calculator.operate();
         }
     } if (e.key === "Delete") {
         e.preventDefault();
-        Calculator.clear();
-        Calculator.screenWork();
+        calculator.clear();
+        calculator.screenWork();
     } if (e.key === "Backspace") {
         e.preventDefault();
-        Calculator.back();
-        Calculator.screenWork();
+        calculator.back();
+        calculator.screenWork();
     } if (e.key === ".") {
         e.preventDefault();
-        if (!Calculator.currentNum.includes('.'))
-        Calculator.appendNum(decimal.innerText);
-        Calculator.screenWork();
+        if (!calculator.currentNum.includes('.'))
+        calculator.appendNum(decimal.innerText);
+        calculator.screenWork();
     }
 });
 
