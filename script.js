@@ -38,9 +38,9 @@ chooseOperator (operator) {
         this.operator = operator; 
         this.previousNum = this.currentNum;
         this.currentNum = '';
-    } else if (this.currentNum != '' && this.previousNum !='') {
+    } else if (this.currentNum !='' && this.previousNum !='') {
         this.operate();
-        this.operator = operator;
+        this.operator = operator;    
     } else {
         this.operator = operator;
     }
