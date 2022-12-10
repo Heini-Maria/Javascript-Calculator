@@ -14,46 +14,38 @@ previousNum: '',
 operate () {
     const prev = parseFloat(this.previousNum);
     const current = parseFloat(this.currentNum);
-if (this.operator == "+") {
-    result = (prev + current);
-} else if (this.operator == "-") {
-    result = prev - current;
-} else if (this.operator == "*") {
-    result = prev * current;
-} else if (this.operator == "÷" || this.operator == "/") {
-    result = prev / current;
-} else {
-    console.log("wooopsie!");
-};
-this.previousNum = result.toString(); 
-this.operator = undefined
-this.currentNum = ''
-console.log(result);
-this.screenWork();
+    if (this.operator == "+") {
+        result = (prev + current);
+    } else if (this.operator == "-") {
+        result = prev - current;
+    } else if (this.operator == "*") {
+        result = prev * current;
+    } else if (this.operator == "÷" || this.operator == "/") {
+        result = prev / current;
+    } 
+    this.previousNum = result.toString(); 
+    this.operator = undefined
+    this.currentNum = ''
+    this.screenWork();
 },
 
 appendNum (num) {
   this.currentNum = this.currentNum.toString() + num.toString();
-  console.log(this.currentNum)
 },
+
 chooseOperator (operator) {
     if(!this.operator && this.currentNum !='') {
-    this.operator = operator; 
-    console.log(this.currentNum);
-    this.previousNum = this.currentNum;
-    this.currentNum = '';
+        this.operator = operator; 
+        this.previousNum = this.currentNum;
+        this.currentNum = '';
     } else if (this.currentNum != '' && this.previousNum !='') {
-    this.operate();
-    console.log(this.currentNum)
-    this.operator = operator;
+        this.operate();
+        this.operator = operator;
     } else {
         this.operator = operator;
     }
-    console.log(this.operator);
-    
-    console.log(this.previousNum)
-    console.log(this.currentNum);
 },
+
 screenWork() {
     if (this.currentNum =='' && this.previousNum == '') {
         screen.textContent = 0;
@@ -77,6 +69,7 @@ clear () {
     this.operator = undefined;
     screen.textContent = '';
 },
+
 back () {
     this.currentNum = this.currentNum.toString().slice(0,-1);
 }
@@ -96,26 +89,35 @@ operators.forEach((operator) => {
         Calculator.screenWork();
     })
 })
+
 equal.addEventListener ('click', () => {
-    if (Calculator.previousNum == '' || Calculator.operator == undefined) {
+    if (Calculator.currentNum == '' || Calculator.operator == undefined) {
         Calculator.screenWork();
-    }else{
+    } else if (Calculator.previousNum == '') {
+        Calculator.previousNum = Calculator.currentNum;
+        Calculator.currentNum = '';
+        Calculator.screenWork();
+    } else {
         Calculator.operate();
     }
-})   
+})
+
 clear.addEventListener ('click', () => {
     Calculator.clear();
     Calculator.screenWork();
 })
+
 back.addEventListener ('click', () => {
     Calculator.back();
     Calculator.screenWork();
 })
+
 decimal.addEventListener ('click', () => {
-        if (!Calculator.currentNum.includes('.'))
+    if (!Calculator.currentNum.includes('.'))
         Calculator.appendNum(decimal.innerText);
         Calculator.screenWork();
 })
+
 document.addEventListener('keydown', function(e) {
     const numberPattern = '^[0-9]+$';
     const operatorPattern = /[+\-*\/]/g;
@@ -125,30 +127,34 @@ document.addEventListener('keydown', function(e) {
             Calculator.appendNum(e.key);
             Calculator.screenWork();
     }
-} if (e.key.match(operatorPattern)) {
-    e.preventDefault();
-    Calculator.chooseOperator(e.key);
-    Calculator.screenWork();
-} if (e.key === "Enter" || e.key === "=") {
-    e.preventDefault();
-    if(Calculator.previousNum == '' || Calculator.operator == undefined) {
+    } if (e.key.match(operatorPattern)) {
+        e.preventDefault();
+        Calculator.chooseOperator(e.key);
         Calculator.screenWork();
-    } else {
-        Calculator.operate();
-} 
-} if (e.key === "Delete") {
-    e.preventDefault();
-    Calculator.clear();
-    Calculator.screenWork();
-} if (e.key === "Backspace") {
-    e.preventDefault();
-    Calculator.back();
-    Calculator.screenWork();
-} if (e.key === ".") {
-    e.preventDefault();
-    if (!Calculator.currentNum.includes('.'))
-    Calculator.appendNum(decimal.innerText);
-    Calculator.screenWork();
-}
+    } if (e.key === "Enter" || e.key === "=") {
+        e.preventDefault();
+        if (Calculator.currentNum == '' || Calculator.operator == undefined) {
+            Calculator.screenWork();
+        } else if (Calculator.previousNum == '') {
+            Calculator.previousNum = Calculator.currentNum;
+            Calculator.currentNum = '';
+            Calculator.screenWork();
+        } else {
+            Calculator.operate();
+        }
+    } if (e.key === "Delete") {
+        e.preventDefault();
+        Calculator.clear();
+        Calculator.screenWork();
+    } if (e.key === "Backspace") {
+        e.preventDefault();
+        Calculator.back();
+        Calculator.screenWork();
+    } if (e.key === ".") {
+        e.preventDefault();
+        if (!Calculator.currentNum.includes('.'))
+        Calculator.appendNum(decimal.innerText);
+        Calculator.screenWork();
+    }
 });
 
