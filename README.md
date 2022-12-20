@@ -4,6 +4,9 @@ This project was done in Brainnest Frontend Development course. The goal for the
 
 Try the calcultor app here:  https://heini-maria.github.io/Javascript-Calculator/
 
+![Nimetön](https://user-images.githubusercontent.com/115211431/208667013-7251e905-fd0b-4c1b-9397-882eb780da3c.png)
+
+
 ## Features
 
   *Functions for all of the basic math operators
