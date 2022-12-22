@@ -9,19 +9,19 @@ Try the calcultor app here:  https://heini-maria.github.io/Javascript-Calculator
 
 ## Features
 
- *Functions for all of the basic math operators
- *backspace and clear functions
- *keyboard support
+ * Functions for all of the basic math operators
+ * backspace and clear functions
+ * keyboard support
 
 ## Technologies used
  
-*HTML
-*CSS
-*JavaScript
+* HTML
+* CSS
+* JavaScript
   
 ## Future works
   
-*to add styling for keyboard events 
+* to add styling for keyboard events 
  
 ## personal experience
 I really enjoyed this project, it gave me a lot of practice with basic JavaScript. The most difficult part was to get my head around all the possible user interactions and how to take them into account in the code.
