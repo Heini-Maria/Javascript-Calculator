@@ -2,7 +2,7 @@
 
 This project was done in Brainnest Frontend Development course. The goal for the project was to build a calculator application that would tackle different user interactions without crashing.
 
-Try the calcultor app here:  https://heini-maria.github.io/Javascript-Calculator/
+Try the calculator app here:  https://heini-maria.github.io/Javascript-Calculator/
 
 ![Nimetön](https://user-images.githubusercontent.com/115211431/208667770-209c455f-6d6a-4002-9cfc-3f453d8ae912.png)
 
