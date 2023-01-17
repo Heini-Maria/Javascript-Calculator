@@ -23,5 +23,5 @@ Try the calculator app here:  https://heini-maria.github.io/Javascript-Calculato
   
 * to add styling for keyboard events 
  
-## personal experience
-I really enjoyed this project, it gave me a lot of practice with basic JavaScript. The most difficult part was to get my head around all the possible user interactions and how to take them into account in the code.
+## Personal experience
+I really enjoyed this project, it gave me a lot of practice with basic JavaScript. The most challenging part was to get my head around all the possible user interactions and how to take them into account in the code.
